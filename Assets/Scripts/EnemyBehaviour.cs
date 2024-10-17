@@ -71,4 +71,9 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
     }
+    private void OnDestroy()
+    {
+        ScoreManager.instance.numEnemies -=  1;
+        HitManager.instance.numKills += 1;
+    }
 }

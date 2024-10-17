@@ -17,4 +17,13 @@ public class BulletMovement : MonoBehaviour
     {
         transform.Translate(speed * Time.deltaTime, 0, 0);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }

@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MyScript : MonoBehaviour
 {
-    public float mainCharXvel;
-    public float mainCharYvel;
-    public float mainCharZvel;
+    float horizontalInput;
+    float verticalInput;
+
+    float mainCharVel;    
 
     public float rotationSpeed;
 
     public bool xForward;
     public bool zChange;
+
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
@@ -19,23 +24,21 @@ public class MyScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        mainCharXvel = 16.25f;
-        mainCharYvel = 16.25f;
-        mainCharZvel = 16.25f;
+        mainCharVel = 1000f;
 
         rotationSpeed = 36.7f;
+
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.A)) { transform.Translate(0, 0, mainCharZvel * Time.deltaTime); }
-        if (Input.GetKey(KeyCode.D)) { transform.Translate(0, 0, -mainCharZvel * Time.deltaTime); }
-        if (Input.GetKey(KeyCode.S)) { transform.Translate(-mainCharXvel * Time.deltaTime, 0, 0); }
-        if (Input.GetKey(KeyCode.W)) { transform.Translate(mainCharXvel * Time.deltaTime, 0, 0); }
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector3(verticalInput * mainCharVel * Time.deltaTime, rb.velocity.y, 
+            horizontalInput * -mainCharVel * Time.deltaTime);
 
-
-        if (Input.GetKey(KeyCode.Q)) { transform.Translate(0, mainCharYvel * Time.deltaTime, 0); }
-        if (Input.GetKey(KeyCode.E)) { transform.Translate(0, -mainCharYvel * Time.deltaTime, 0); }
     }
 }

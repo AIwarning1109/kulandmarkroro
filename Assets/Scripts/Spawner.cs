@@ -12,17 +12,18 @@ public class Spawner : MonoBehaviour
     {
         spawnerOffsetX = 0f;
         spawnerOffsetZ = 0f;
-        InvokeRepeating("Spawn", 3f, 1f);
+        InvokeRepeating("Spawn", 3f, 1.75f);
     }
 
     // Update is called once per frame
     void Spawn()
     {
-        spawnerOffsetX = Random.Range(20, 61);
-        spawnerOffsetZ = Random.Range(-55, 21);
+        ScoreManager.instance.numEnemies += 1;
+        spawnerOffsetX = Random.Range(50, 61);
+        spawnerOffsetZ = Random.Range(-40, 6);
         this.transform.position = new Vector3(spawnerOffsetX, 0, spawnerOffsetZ);
         GameObject clone = Instantiate(prefab);
-        Destroy(clone, 10f);
+        Destroy(clone, 60f);
         clone.transform.position = transform.position;
         clone.transform.rotation = transform.rotation;
     }
