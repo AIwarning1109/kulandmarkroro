@@ -14,12 +14,7 @@ public class SceneSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ScoreManager.instance.numEnemies > 10)
-        {
-            SceneManager.LoadScene("LoseScreen");
-        }
-
-        if (HitManager.instance.numKills > 10)
+        if (HitManager.instance.numKills > 20)
         {
             SceneManager.LoadScene("WinScreen");
         }

@@ -21,10 +21,11 @@ public class Spawner : MonoBehaviour
         ScoreManager.instance.numEnemies += 1;
         spawnerOffsetX = Random.Range(50, 61);
         spawnerOffsetZ = Random.Range(-40, 6);
-        this.transform.position = new Vector3(spawnerOffsetX, 0, spawnerOffsetZ);
+        this.transform.position = new Vector3(spawnerOffsetX, 3f, spawnerOffsetZ);
         GameObject clone = Instantiate(prefab);
         Destroy(clone, 60f);
         clone.transform.position = transform.position;
         clone.transform.rotation = transform.rotation;
+        clone.transform.Rotate(0f, 120f, 0f);
     }
 }
